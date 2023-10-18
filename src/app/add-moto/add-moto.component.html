@@ -1,33 +1,32 @@
 <div class="container">
   <div>
-    <h2>Ajouter un Produit :</h2>
+    <h2>Ajouter un Moto :</h2>
   </div>
   <form>
     <div class="col-sm-2 col-md-2 col-lg-2">
-      <label>ID Produit</label>
+      <label>ID Moto</label>
       <input
-        readonly
         type="text"
         [(ngModel)]="newMoto.idMoto"
-        name="idProduit"
+        name="idMoto"
         class="form-control"
       />
     </div>
     <div class="col-sm-4 col-md-4 col-lg-4">
-      <label>Nom Produit</label>
+      <label>Marque Moto</label>
       <input
         type="text"
         [(ngModel)]="newMoto.marqueMoto"
-        name="nomProduit"
+        name="marqueMoto"
         class="form-control"
       />
     </div>
     <div class="col-sm-2 col-md-2 col-lg-2">
-      <label>Prix Produit</label>
+      <label>Prix Moto</label>
       <input
         type="number"
         [(ngModel)]="newMoto.prixMoto"
-        name="prixProduit"
+        name="prixMoto"
         class="form-control"
       />
     </div>
