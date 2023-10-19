@@ -38,15 +38,14 @@ export class MotoService {
     this.motos.push(motor);
   }
   supprimerMoto(moto: Moto) {
-    //supprimer le produit prod du tableau produits
     const index = this.motos.indexOf(moto, 0);
     if (index > -1) {
       this.motos.splice(index, 1);
     }
     //ou Bien
-    /* this.produits.forEach((cur, index) => {
-    if(prod.idProduit === cur.idProduit) {
-    this.produits.splice(index, 1);
+    /* this.motos.forEach((cur, index) => {
+    if(prod.idMoto === cur.idMoto) {
+    this.motos.splice(index, 1);
     }
     }); */
   }
