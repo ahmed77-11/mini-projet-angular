@@ -54,9 +54,22 @@ export class MotoService {
     this.moto = this.motos.find((m) => m.idMoto == id)!;
     return this.moto;
   }
+  trierMotos() {
+    this.motos = this.motos.sort((n1, n2) => {
+      if (n1.idMoto! > n2.idMoto!) {
+        return 1;
+      }
+      if (n1.idMoto! < n2.idMoto!) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
   updateMoto(m: Moto) {
     // console.log(m);
     this.supprimerMoto(m);
     this.ajouterMoto(m);
+    this.trierMotos();
   }
 }
