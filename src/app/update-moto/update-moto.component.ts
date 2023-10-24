@@ -22,7 +22,6 @@ export class UpdateMotoComponent implements OnInit {
     console.log(this.currentMoto);
   }
   updateMoto() {
-    //console.log(this.currentProduit);
     this.motoService.updateMoto(this.currentMoto);
     this.router.navigate(['motos']);
   }
