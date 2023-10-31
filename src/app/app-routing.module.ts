@@ -17,6 +17,7 @@ const routes: Routes = [
     path: 'updateMoto/:id',
     component: UpdateMotoComponent,
   },
+
   { path: '', redirectTo: 'motos', pathMatch: 'full' },
 ];
 

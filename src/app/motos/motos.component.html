@@ -7,6 +7,7 @@
           <th>Marque</th>
           <th>Prix</th>
           <th>Date Du fabrication</th>
+          <th>Model</th>
         </tr>
         <tbody *ngFor="let moto of motos">
           <tr>
@@ -14,6 +15,7 @@
             <td>{{ moto.marqueMoto }}</td>
             <td>{{ moto.prixMoto }}</td>
             <td>{{ moto.dateCreation | date : "dd/MM/yyyy" }}</td>
+            <td>{{ moto.motoModel!.nomModel }}</td>
             <td>
               <a class="btn btn-danger" (click)="supprimerMoto(moto)">
                 Supprimer
