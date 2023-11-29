@@ -6,6 +6,8 @@ import { UpdateMotoComponent } from './update-moto/update-moto.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { MotoGuard } from './moto.guard';
+import { RechercheParModelComponent } from './recherche-par-model/recherche-par-model.component';
+import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 
 const routes: Routes = [
   {
@@ -23,7 +25,8 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'app-forbidden', component: ForbiddenComponent },
-
+  { path: 'rechercheParModel', component: RechercheParModelComponent },
+  { path: 'rechercheParNom', component: RechercheParNomComponent },
   { path: '', redirectTo: 'motos', pathMatch: 'full' },
 ];
 

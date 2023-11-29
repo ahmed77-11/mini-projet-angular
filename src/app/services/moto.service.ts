@@ -9,6 +9,7 @@ export class MotoService {
   motos: Moto[];
   moto?: Moto;
   motoModel: MotoModel[];
+  motoRecherche?: Moto[];
 
   constructor() {
     this.motoModel = [
@@ -85,5 +86,26 @@ export class MotoService {
     this.supprimerMoto(m);
     this.ajouterMoto(m);
     this.trierMotos();
+  }
+  rechercheParModel(idModel: number): Moto[] {
+    this.motoRecherche = [];
+    this.motos.forEach((cur, index) => {
+      if (idModel == cur.motoModel?.idModel) {
+        console.log('cur ' + cur);
+        this.motoRecherche!.push(cur);
+      }
+    });
+    return this.motoRecherche;
+  }
+  rechercherParNom(marque: string): Moto[] {
+    this.motoRecherche = [];
+    this.motos.forEach((cur, index) => {
+      cur.marqueMoto = cur.marqueMoto?.toLocaleLowerCase();
+      if (cur.marqueMoto?.includes(marque.toLocaleLowerCase())) {
+        console.log('cur ' + cur);
+        this.motoRecherche!.push(cur);
+      }
+    });
+    return this.motoRecherche;
   }
 }
