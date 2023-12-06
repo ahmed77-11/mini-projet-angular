@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'app-forbidden', component: ForbiddenComponent },
   { path: 'rechercheParModel', component: RechercheParModelComponent },
-  { path: 'rechercheParNom', component: RechercheParNomComponent },
+  { path: 'rechercheParMarque', component: RechercheParNomComponent },
   { path: '', redirectTo: 'motos', pathMatch: 'full' },
 ];
 

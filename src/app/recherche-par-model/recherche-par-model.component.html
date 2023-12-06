@@ -2,7 +2,7 @@
   <div class="card shadow mb-4">
     <div class="card-body">
       <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
-        <label>Categories </label>
+        <label>Les Models </label>
         <select
           class="form-control form-control-lg"
           id="idModel"
@@ -30,7 +30,7 @@
             <td>{{ moto.marqueMoto }}</td>
             <td>{{ moto.prixMoto }}</td>
             <td>{{ moto.dateCreation | date : "dd/MM/yyyy" }}</td>
-            <td>{{ moto.motoModel!.nomModel }}</td>
+            <td>{{ moto.model!.nomModel }}</td>
             <!-- <td>
               <a
                 *ngIf="authService.isAdmin()"

@@ -16,14 +16,19 @@ export class RechercheParNomComponent implements OnInit {
   constructor(private motoService: MotoService) {}
   ngOnInit(): void {
     // this.allMotos = this.motoService.listeMotos();
-    this.motos = this.motoService.listeMotos();
+    this.motoService.listeMotos().subscribe((moto) => {
+      this.motos = moto;
+    });
   }
   rechercheMoto() {
-    this.motos = this.motoService.rechercherParNom(this.marqueMoto);
+    this.motoService.rechercherParNom(this.marqueMoto).subscribe((motos) => {
+      this.motos = motos;
+      console.log(motos);
+    });
   }
   onKeyUp(filterText: string) {
     this.motos = this.allMotos.filter((item) =>
-      item.marqueMoto?.toLocaleLowerCase().includes(filterText)
+      item.marqueMoto?.toLocaleLowerCase().includes(filterText.toLowerCase())
     );
   }
 }

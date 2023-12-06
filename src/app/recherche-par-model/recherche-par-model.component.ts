@@ -15,9 +15,14 @@ export class RechercheParModelComponent implements OnInit {
 
   constructor(private motoService: MotoService) {}
   ngOnInit(): void {
-    this.models = this.motoService.listeModel();
+    this.motoService.listeModel().subscribe((data) => {
+      console.log(data);
+      this.models = data;
+    });
   }
   onChange() {
-    this.motos = this.motoService.rechercheParModel(this.IdModel);
+    this.motoService.rechercheParModel(this.IdModel).subscribe((motos) => {
+      this.motos = motos;
+    });
   }
 }

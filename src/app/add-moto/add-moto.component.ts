@@ -19,15 +19,17 @@ export class AddMotoComponent implements OnInit {
     this.message = '';
   }
   ngOnInit(): void {
-    this.motoModels = this.motoService.listeModel();
+    this.motoService.listeModel().subscribe((motoModels) => {
+      this.motoModels = motoModels;
+    });
   }
 
   addMoto() {
-    // console.log(this.newMoto);
-    this.newMotoModel = this.motoService.consulterModel(this.newIdModel);
-    this.newMoto.motoModel = this.newMotoModel;
-    this.motoService.ajouterMoto(this.newMoto);
-    this.message = 'Moto ' + this.newMoto.marqueMoto + ' ajouter avec success';
-    this.router.navigate(['motos']);
+    this.newMoto.model = this.motoModels.find(
+      (motoModel) => motoModel.idModel == this.newIdModel
+    );
+    this.motoService.ajouterMoto(this.newMoto).subscribe((moto) => {
+      this.router.navigate(['motos']);
+    });
   }
 }

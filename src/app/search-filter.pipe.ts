@@ -8,7 +8,9 @@ export class SearchFilterPipe implements PipeTransform {
     console.log('transform');
     return list
       ? list.filter((item) =>
-          item.marqueMoto.toLowerCase().includes(filterText)
+          item.marqueMoto
+            .toLocaleLowerCase()
+            .includes(filterText.toLocaleLowerCase())
         )
       : [];
   }

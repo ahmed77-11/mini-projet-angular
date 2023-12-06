@@ -1,70 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Moto } from '../model/moto.model';
 import { MotoModel } from '../model/motomodel.model';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class MotoService {
-  motos: Moto[];
+  apiURL: string = 'http://localhost:8080/motos/api';
+  motos!: Moto[];
   moto?: Moto;
-  motoModel: MotoModel[];
+  motoModel!: MotoModel[];
   motoRecherche?: Moto[];
 
-  constructor() {
-    this.motoModel = [
-      { idModel: 1, nomModel: 'Moto Normal' },
-      { idModel: 2, nomModel: 'Moto Sportif' },
-    ];
-    this.motos = [
-      {
-        idMoto: 1,
-        marqueMoto: 'Honda',
-        prixMoto: 3000,
-        dateCreation: new Date('01/14/2011'),
-        motoModel: { idModel: 1, nomModel: 'Moto Normal' },
-      },
-      {
-        idMoto: 2,
-        marqueMoto: 'BMW',
-        prixMoto: 10000,
-        dateCreation: new Date('12/17/2010'),
-        motoModel: { idModel: 2, nomModel: 'Moto Sportif' },
-      },
-      {
-        idMoto: 3,
-        marqueMoto: 'Yamaha',
-        prixMoto: 5000,
-        dateCreation: new Date('02/20/2020'),
-        motoModel: { idModel: 2, nomModel: 'Moto Sportif' },
-      },
-    ];
-  }
+  constructor(private http: HttpClient) {}
 
-  listeMotos(): Moto[] {
-    return this.motos;
+  listeMotos(): Observable<Moto[]> {
+    return this.http.get<Moto[]>(this.apiURL);
   }
-  listeModel(): MotoModel[] {
-    return this.motoModel;
+  listeModel(): Observable<MotoModel[]> {
+    return this.http.get<MotoModel[]>(this.apiURL + '/mod');
   }
-  ajouterMoto(motor: Moto) {
-    this.motos.push(motor);
+  ajouterMoto(motor: Moto): Observable<Moto> {
+    return this.http.post<Moto>(this.apiURL, motor, httpOptions);
   }
-  supprimerMoto(moto: Moto) {
-    const index = this.motos.indexOf(moto, 0);
-    if (index > -1) {
-      this.motos.splice(index, 1);
-    }
-    //ou Bien
-    /* this.motos.forEach((cur, index) => {
-    if(prod.idMoto === cur.idMoto) {
-    this.motos.splice(index, 1);
-    }
-    }); */
+  supprimerMoto(id: number) {
+    const url = `${this.apiURL}/${id}`;
+    return this.http.delete(url, httpOptions);
   }
-  consulterMoto(id: number): Moto {
-    this.moto = this.motos.find((m) => m.idMoto == id)!;
-    return this.moto;
+  consulterMoto(id: number): Observable<Moto> {
+    const url = `${this.apiURL}/${id}`;
+    return this.http.get<Moto>(url);
   }
   consulterModel(id: number): MotoModel {
     return this.motoModel.find((mod) => mod.idModel == id)!;
@@ -81,31 +51,15 @@ export class MotoService {
     });
   }
 
-  updateMoto(m: Moto) {
-    // console.log(m);
-    this.supprimerMoto(m);
-    this.ajouterMoto(m);
-    this.trierMotos();
+  updateMoto(m: Moto): Observable<Moto> {
+    return this.http.put<Moto>(this.apiURL, m, httpOptions);
   }
-  rechercheParModel(idModel: number): Moto[] {
-    this.motoRecherche = [];
-    this.motos.forEach((cur, index) => {
-      if (idModel == cur.motoModel?.idModel) {
-        console.log('cur ' + cur);
-        this.motoRecherche!.push(cur);
-      }
-    });
-    return this.motoRecherche;
+  rechercheParModel(idModel: number): Observable<Moto[]> {
+    const url = `${this.apiURL}/motosmod/${idModel}`;
+    return this.http.get<Moto[]>(url);
   }
-  rechercherParNom(marque: string): Moto[] {
-    this.motoRecherche = [];
-    this.motos.forEach((cur, index) => {
-      cur.marqueMoto = cur.marqueMoto?.toLocaleLowerCase();
-      if (cur.marqueMoto?.includes(marque.toLocaleLowerCase())) {
-        console.log('cur ' + cur);
-        this.motoRecherche!.push(cur);
-      }
-    });
-    return this.motoRecherche;
+  rechercherParNom(marque: string): Observable<Moto[]> {
+    const url = `${this.apiURL}/motosByMarque/${marque}`;
+    return this.http.get<Moto[]>(url);
   }
 }

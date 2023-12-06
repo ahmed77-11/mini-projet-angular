@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { MotosComponent } from './motos/motos.component';
 import { AddMotoComponent } from './add-moto/add-moto.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 import { UpdateMotoComponent } from './update-moto/update-moto.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
@@ -25,7 +27,7 @@ import { SearchFilterPipe } from './search-filter.pipe';
     RechercheParNomComponent,
     SearchFilterPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

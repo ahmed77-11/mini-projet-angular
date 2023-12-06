@@ -19,18 +19,24 @@ export class UpdateMotoComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.motoModels = this.motoService.listeModel();
-    this.currentMoto = this.motoService.consulterMoto(
-      this.activatedRoute.snapshot.params['id']
-    );
-    this.updatedMotoModelId = this.currentMoto.motoModel!.idModel;
+    this.motoService.listeModel().subscribe((data) => {
+      this.motoModels = data;
+    });
+    this.motoService
+      .consulterMoto(this.activatedRoute.snapshot.params['id'])
+      .subscribe((data) => {
+        this.currentMoto = data;
+        this.updatedMotoModelId = this.currentMoto.model!.idModel;
+      });
+
     console.log(this.currentMoto);
   }
   updateMoto() {
-    this.currentMoto.motoModel = this.motoService.consulterModel(
-      this.updatedMotoModelId
+    this.currentMoto.model = this.motoModels.find(
+      (m) => m.idModel == this.updatedMotoModelId
     );
-    this.motoService.updateMoto(this.currentMoto);
-    this.router.navigate(['motos']);
+    this.motoService.updateMoto(this.currentMoto).subscribe((mot) => {
+      this.router.navigate(['motos']);
+    });
   }
 }

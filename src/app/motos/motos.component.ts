@@ -17,11 +17,21 @@ export class MotosComponent implements OnInit {
     this.motos = [];
   }
   ngOnInit(): void {
-    this.motos = this.motoService.listeMotos();
+    this.chargerMotos();
   }
-
+  chargerMotos() {
+    this.motoService.listeMotos().subscribe((moto) => {
+      console.log(moto);
+      this.motos = moto;
+    });
+  }
   supprimerMoto(m: Moto) {
     let conf = confirm('Etes-vous sûr ?');
-    if (conf) this.motoService.supprimerMoto(m);
+    if (conf) {
+      this.motoService.supprimerMoto(m.idMoto!).subscribe(() => {
+        console.log('moto supprimé');
+        this.chargerMotos();
+      });
+    }
   }
 }

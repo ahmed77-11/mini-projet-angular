@@ -5,5 +5,5 @@ export class Moto {
   marqueMoto?: string;
   prixMoto?: number;
   dateCreation?: Date;
-  motoModel?: MotoModel;
+  model?: MotoModel;
 }
