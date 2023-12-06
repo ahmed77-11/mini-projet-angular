@@ -1,4 +1,4 @@
 {
   "editor.acceptSuggestionOnEnter": "on",
-  "editor.inlineSuggest.showToolbar": "onHover"
+  "editor.inlineSuggest.showToolbar": "always"
 }
